@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 27 Mar 2021, 14:05
+-- Czas generowania: 21 Kwi 2021, 13:19
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.10
 
@@ -38,17 +38,8 @@ CREATE TABLE `testTable` (
 --
 
 INSERT INTO `testTable` (`id`, `Name`, `Model`) VALUES
-(1, 'Mercedes', 'X10'),
-(2, 'asd', 'asd'),
-(3, 'asd', 'asd'),
-(4, 'nowy pojazd', 'pojazd'),
-(5, 'nowy pojazd', 'pojazd'),
-(6, 'efsefesf', ''),
-(7, 'efsefesf', ''),
-(8, 'dupa', 'dupa'),
-(9, 'dupa', 'dupa'),
-(10, 'asd', 'asd'),
-(11, 'asd', 'asd');
+(48, 'Test', 'Test'),
+(49, 'Testowe autko', 'TEstowe Autko');
 
 -- --------------------------------------------------------
 
@@ -102,6 +93,13 @@ CREATE TABLE `vdb_users` (
   `Password` varchar(30) COLLATE utf8mb4_polish_ci DEFAULT NULL,
   `Type` enum('administrator','serwisant','pracownik') COLLATE utf8mb4_polish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Zrzut danych tabeli `vdb_users`
+--
+
+INSERT INTO `vdb_users` (`Id`, `Name`, `Surname`, `Login`, `Password`, `Type`) VALUES
+(1, 'Admin', 'Admin', 'Admin', 'zaq1@WSX', 'administrator');
 
 -- --------------------------------------------------------
 
@@ -185,7 +183,7 @@ ALTER TABLE `vdb_vehicle_rentals`
 -- AUTO_INCREMENT dla tabeli `testTable`
 --
 ALTER TABLE `testTable`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT dla tabeli `vdb_customer`
@@ -203,7 +201,7 @@ ALTER TABLE `vdb_repairs`
 -- AUTO_INCREMENT dla tabeli `vdb_users`
 --
 ALTER TABLE `vdb_users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT dla tabeli `vdb_vehicles`
