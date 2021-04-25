@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import Axios from 'axios'
-import '../../components_style/styles.css'
+import '../../components_style/style.css'
 //import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,6 +11,7 @@ const AddDataForm = props => {
     const [vehicleModel, setVehicleModel] = useState("")
     //to get data
     const [vehicleList, setVehiceList] = useState([])
+    
     useEffect(()=> {
         Axios.get('http://localhost:3001/getVehicle').then((response) => {
             setVehiceList(response.data)

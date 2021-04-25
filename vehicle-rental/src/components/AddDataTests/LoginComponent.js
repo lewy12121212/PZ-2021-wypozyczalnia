@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import Axios from 'axios'
-import '../components_style/styles.css'
+import '../components_style/style.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const LoginComponent = props => {

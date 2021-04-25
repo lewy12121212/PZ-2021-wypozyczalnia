@@ -15,17 +15,25 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
-
-
 app.get('/', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
     res.send('hello express server!')
+});
+
+//zwracanie listy pojazdów z tabeli vdb_vehicles
+app.get('/getVehicleList', (req, res) => { 
+    const sqlSelect = "SELECT * FROM vdb_vehicles"
+    db.query(sqlSelect, (err, result) => {
+        res.send(result)
+    })
 });
 
 //test EndPoint
 app.get('/getVehicle', (req, res) => { 
     const sqlSelect = "SELECT * FROM testTable"
     db.query(sqlSelect, (err, result) => {
+        print(result)
         res.send(result)
+
     })
 });
 

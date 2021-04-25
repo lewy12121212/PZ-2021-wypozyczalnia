@@ -1,0 +1,35 @@
+.MainComponentDiv{
+    border-radius: 15px;
+    border: 2px solid black;
+}
+
+.MainComponentDiv h2{
+    text-align: center;
+    font-style: italic;
+    margin: 10px;
+}
+
+.SingleComponentBox{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 15px;
+    border: 2px solid black;
+}
+
+.SingleComponentBox h5{
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+    margin: 5px;
+    height:50px;
+}
+
+.SingleVehicleItem{
+    border-radius: 15px;
+    border: 2px solid black;
+    margin: 5px
+}
+
+.SingleVehicleItem button{
+    margin: 3px
+}
