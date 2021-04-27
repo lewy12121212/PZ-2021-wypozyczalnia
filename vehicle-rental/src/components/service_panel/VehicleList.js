@@ -21,7 +21,7 @@ const VehicleList = (props) => {
             {vehicleList.map((val) => {
                 if(props.listParam == val.State){ //listowanie w zależności od statusu pojazdu
                     return (
-                        <VehicleItem name={val.Name} model={val.Model} type={val.Type} engine={val.Engine_capacity}/>  
+                        <VehicleItem vehicle={val} triggerShowVehiceInfo={props.triggerShowVehiceInfo} setActiveVehicle={props.handleVehicle}/>  
                     ); // przekazanie parametrów do komponentu pojedynczego "itemu"
                 }
             })}
