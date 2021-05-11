@@ -1,3 +1,5 @@
+
+
 const express = require('express')
 const app = express()
 const mysql = require('mysql')
@@ -83,6 +85,15 @@ app.get('/getUsersInfo', (req, res) => {
     })
 });
 
+//zwracanie listy użytkowników danego typu
+app.get('/getAllUsersInfo', (req, res) => { 
+    const sqlSelect = "SELECT * FROM vdb_users;"
+    db.query(sqlSelect, (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
 //dodawanie naprawy
 app.post('/insertRepair', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
     
@@ -96,6 +107,46 @@ app.post('/insertRepair', (req, res) => { //req -> do pobrania danych z frontend
         //console.log("ojć" + vehicleName +", "+ vehicleModel)
         const sqlInsert = "INSERT INTO vdb_repairs (Reparer_id, Vehicle_id, Replaced_parts, Activities_performed) VALUES (?,?,?,?);"
         db.query(sqlInsert, [reparerId, vehicleId, replacedParts, activitiesPerformed], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+
+});
+
+//dodawanie użytkownika
+app.post('/insertUser', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const name = req.body.name
+    const surname = req.body.surname
+    const login = req.body.login
+    const password = req.body.password
+    const type = req.body.type
+
+    console.log(name, surname, login, password, type)
+
+    if(name != "" && surname != "" && login != "" && password != "" && type != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "INSERT INTO vdb_users (Name, Surname, Login, Password, Type) VALUES (?,?,?,?,?);"
+        db.query(sqlInsert, [name, surname, login, password, type], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+
+});
+
+//usuwanie użytkownika
+app.delete('/deleteUser', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const userId = req.headers['id'];
+    console.log("userId: " + userId)
+
+    if(userId != ""){
+        const sqlInsert = "DELETE FROM vdb_users WHERE Id like (?);"
+        db.query(sqlInsert, [userId], (err, result) => {
             console.log(result)
         })
     } else {
