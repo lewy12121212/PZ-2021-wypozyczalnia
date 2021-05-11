@@ -1,8 +1,12 @@
 import React from 'react'
-import '../../components_style/style.css'
+//import '../components_style/style.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
-
+import MainPanel from './MainPanel'
+import ClientPanel from './client_panel/ClientPanel'
+import HistoryPanel from './history_panel/HistoryPanel'
+import UsersPanel from './users_panel/UsersPanel'
+import VehiclePanel from './vehicle_panel/VehiclePanel'
 
 class AdminPanel extends React.Component {
 
@@ -13,38 +17,85 @@ class AdminPanel extends React.Component {
       visable_user_panel: false,
       visable_vehice_panel: false,
       visable_client_panel: false,
-      active_history: false
+      visable_history_panel: false
     };
+  }
+
+  triggerShowMainPanel = () => {
+    this.setState({
+      ...this.state,
+      visable_main_panel: true,
+      visable_user_panel: false,
+      visable_vehice_panel: false,
+      visable_client_panel: false,
+      visable_history_panel: false
+    })
+  }
+
+  triggerShowUserPanel = () => {
+    this.setState({
+      ...this.state,
+      visable_main_panel: false,
+      visable_user_panel: true,
+      visable_vehice_panel: false,
+      visable_client_panel: false,
+      visable_history_panel: false
+    })
+  }
+
+  triggerShowVehiclePanel = () => {
+    this.setState({
+      ...this.state,
+      visable_main_panel: false,
+      visable_user_panel: false,
+      visable_vehice_panel: true,
+      visable_client_panel: false,
+      visable_history_panel: false
+    })
+  }
+
+  triggerShowClientPanel = () => {
+    this.setState({
+      ...this.state,
+      visable_main_panel: false,
+      visable_user_panel: false,
+      visable_vehice_panel: false,
+      visable_client_panel: true,
+      visable_history_panel: false
+    })
+  }
+
+  triggerShowHistoryPanel = () => {
+    this.setState({
+      ...this.state,
+      visable_main_panel: false,
+      visable_user_panel: false,
+      visable_vehice_panel: false,
+      visable_client_panel: false,
+      visable_history_panel: true
+    })
   }
 
   render() {
     return (
       <div className="MainComponentDiv container">
+        <h2>Panel administratora</h2>
+
         {this.state.visable_main_panel && 
-          <div>
-            <h2>Panel administratora</h2>
-            <div className="sectionBox">
-              <h5>zarządzenie użytkownikami</h5>
-              <button className="btn btn-success col-4">Dodaj użytkownika</button>
-              <button className="btn btn-danger col-4">Usuń użytkownika</button>
-            </div>
-            <div className="sectionBox">
-              <h5>zarządzenie pojazdami</h5>
-              <button className="btn btn-success col-4">Dodaj pojaz</button>
-              <button className="btn btn-danger col-4">Usuń pojazd</button>
-            </div>
-            <div className="sectionBox">
-              <h5>zarządzenie klietami</h5>
-              <button className="btn btn-danger col-4">Usuń klienta</button>
-              <button className="btn btn-primary col-4">Wyświetl listę klientów</button>
-            </div>
-            <div className="sectionBox">
-              <h5>historie</h5>
-              <button className="btn btn-primary col-4">Wyświetl historię wypożyczeń</button>
-              <button className="btn btn-primary col-4">Wyświetl historię napraw</button>
-            </div>
-          </div>
+          <MainPanel 
+            triggerShowUserPanel={this.triggerShowUserPanel}
+            triggerShowVehiclePanel={this.triggerShowVehiclePanel}
+            triggerShowClientPanel={this.triggerShowClientPanel}
+            triggerShowHistoryPanel={this.triggerShowHistoryPanel}
+            triggerShowMainPanel={this.triggerShowMainPanel}
+          />
         }
+
+        {this.state.visable_client_panel && <ClientPanel triggerShowMainPanel={this.triggerShowMainPanel} />}
+        {this.state.visable_vehice_panel && <VehiclePanel triggerShowMainPanel={this.triggerShowMainPanel} />}
+        {this.state.visable_user_panel && <UsersPanel triggerShowMainPanel={this.triggerShowMainPanel} />}
+        {this.state.visable_history_panel && <HistoryPanel triggerShowMainPanel={this.triggerShowMainPanel}/>}
+        
 
       </div>
     )

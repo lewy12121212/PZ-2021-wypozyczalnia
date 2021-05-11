@@ -12,3 +12,34 @@
 .sectionBox{
     margin: 5px;
 }
+
+h4{
+    font-weight: italic;
+}
+
+.option_panel_box{
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 15px;
+    margin: 5px;
+    align-items: center;
+    height: 100%;
+}
+
+.option_panel_box td{
+    text-align: justify;
+    padding: 5px;
+}
+
+.option_panel_box input{
+    width: 100%;
+}
+
+.del_user_panel_box{
+    margin: 15px;
+    padding: 5px;
+}
+
+.form-select{
+    font-size: 20px;
+}
