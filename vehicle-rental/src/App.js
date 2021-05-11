@@ -3,8 +3,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import React, { useState } from 'react';
-
+import React from 'react';
+// usunięty USESTATE i USEEFFECT :/
 import AdminPanel from './components/admin_panel/AdminPanel'
 import ServicePanel from './components/service_panel/ServicePanel'
 import EmployeePanel from './components/employee_panel/EmployeePanel'
@@ -15,7 +15,7 @@ import AddDataFrom from './components/AddDataTests/AddDataForm'
 //import VehicleList from './components/VehicleList'
 
 function App() {
-  const [token, setToken] = useState();
+  //const [token, setToken] = useState();
 
   //if(!token) {
   //  return <Login setToken={setToken} />

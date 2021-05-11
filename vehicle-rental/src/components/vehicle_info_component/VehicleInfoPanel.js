@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */ //usunięcie ostrzeżenia o niestepłnionych zależnościch (headers in UseEffect)
 import React, {useState, useEffect} from 'react'
 import '../../components_style/style.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,19 +25,19 @@ const VehicleInfoPanel = (props) => {
       Axios.get('http://localhost:3001/getVehicleInfo', {headers}).then((response) => {
           setVehicleData(response.data)
       })
-  },[]);
+  }, []);
 
   useEffect(()=> {
     Axios.get('http://localhost:3001/getVehicleRepairInfo', {headers}).then((response) => {
         setVehicleRepairData(response.data)
     })
-  },[]);
+  }, []);
 
   useEffect(()=> {
     Axios.get('http://localhost:3001/getVehicleRentalsInfo', {headers}).then((response) => {
         setVehicleRentalsData(response.data)
     })
-  },[]);
+  }, []);
 
   return (
       <div className="VehicleMainView">

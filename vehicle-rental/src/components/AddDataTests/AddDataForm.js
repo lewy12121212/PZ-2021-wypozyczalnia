@@ -24,7 +24,7 @@ const AddDataForm = props => {
             vehicleModel: vehicleModel
         });
 
-        if(vehicleName !== "" && typeof vehicleModel !== ""){
+        if(vehicleName !== "" && vehicleModel !== ""){ //typeof ? 
             setVehiceList([
                 ...vehicleList, 
                 {Name: vehicleName, Model: vehicleModel}

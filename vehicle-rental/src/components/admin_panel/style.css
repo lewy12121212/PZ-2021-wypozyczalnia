@@ -1,0 +1,14 @@
+.MainComponentDiv{
+    border-radius: 15px;
+    border: 2px solid black;
+    align-items: center;
+    text-align: center;
+}
+
+.MainComponentDiv button{
+    margin: 5px;
+}
+
+.sectionBox{
+    margin: 5px;
+}

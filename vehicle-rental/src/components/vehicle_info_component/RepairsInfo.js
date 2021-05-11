@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import '../../components_style/style.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css'
