@@ -19,6 +19,39 @@ app.get('/', (req, res) => { //req -> do pobrania danych z frontend / res -> do 
     res.send('hello express server!')
 });
 
+//zwracanie informacji o pojedździe z tabeli vdb_vehicles
+app.get('/getVehicleInfo', (req, res) => { 
+    const vehicleId = req.headers['id'];
+
+    const sqlSelect = "SELECT * FROM vdb_vehicles WHERE Id like (?);"
+    db.query(sqlSelect, [vehicleId], (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
+//Zwracanie informacji o naprawach danego pojazdu
+app.get('/getVehicleRepairInfo', (req, res) => { 
+    const vehicleId = req.headers['id'];
+
+    const sqlSelect = "SELECT * FROM vdb_repairs WHERE Vehicle_id like (?);"
+    db.query(sqlSelect, [vehicleId], (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
+//Zwracanie informacji o wypożyczeniach pojazdu
+app.get('/getVehicleRentalsInfo', (req, res) => { 
+    const vehicleId = req.headers['id'];
+
+    const sqlSelect = "SELECT * FROM vdb_vehicle_rentals WHERE Vehicle_id like (?);"
+    db.query(sqlSelect, [vehicleId], (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
 //zwracanie listy pojazdów z tabeli vdb_vehicles
 app.get('/getVehicleList', (req, res) => { 
     const sqlSelect = "SELECT * FROM vdb_vehicles"
@@ -27,6 +60,51 @@ app.get('/getVehicleList', (req, res) => {
     })
 });
 
+// zwrócenie struktury tabeli na podstawie nazwy
+app.get('/getTableStructure', (req, res) => { 
+    const vehicleName = req.headers['table'];
+    console.log(vehicleName)
+    const sqlSelect = "DESCRIBE " + vehicleName
+    db.query(sqlSelect, (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
+//zwracanie listy użytkowników danego typu
+app.get('/getUsersInfo', (req, res) => { 
+    const usersType = req.headers['userstype'];
+    console.log(usersType)
+
+    const sqlSelect = "SELECT * FROM vdb_users WHERE Type like (?);"
+    db.query(sqlSelect, [usersType], (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
+//dodawanie naprawy
+app.post('/insertRepair', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const reparerId = req.body.reparerId
+    const vehicleId = req.body.vehicleId
+    const replacedParts = req.body.replacedParts
+    const activitiesPerformed = req.body.activitiesPerformed
+    console.log(reparerId + vehicleId + replacedParts + activitiesPerformed)
+
+    if(reparerId != "" && vehicleId != "" && replacedParts != "" && activitiesPerformed != "" ){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "INSERT INTO vdb_repairs (Reparer_id, Vehicle_id, Replaced_parts, Activities_performed) VALUES (?,?,?,?);"
+        db.query(sqlInsert, [reparerId, vehicleId, replacedParts, activitiesPerformed], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+
+});
+
+////////////////////////////////////////////////////////////////////
 //test EndPoint
 app.get('/getVehicle', (req, res) => { 
     const sqlSelect = "SELECT * FROM testTable"
