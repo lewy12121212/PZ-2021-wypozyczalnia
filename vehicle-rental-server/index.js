@@ -135,7 +135,6 @@ app.post('/insertUser', (req, res) => { //req -> do pobrania danych z frontend /
     } else {
         console.log("empty data to database :(")
     }
-
 });
 
 //usuwanie użytkownika
@@ -147,6 +146,45 @@ app.delete('/deleteUser', (req, res) => { //req -> do pobrania danych z frontend
     if(userId != ""){
         const sqlInsert = "DELETE FROM vdb_users WHERE Id like (?);"
         db.query(sqlInsert, [userId], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+
+});
+
+//dodawanie pojazdu
+app.post('/insertVehicle', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const name = req.body.name
+    const model = req.body.model
+    const type = req.body.type
+    const engine = req.body.engine
+    const state = req.body.state
+
+    console.log(name, model, type, engine, state)
+
+    if(name != "" && model != "" && type != "" && engine != "" && state != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "INSERT INTO vdb_vehicles (Name, Model, Type, Engine_capacity, State) VALUES (?,?,?,?,?);"
+        db.query(sqlInsert, [name, model, type, engine, state], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+});
+
+//usuwanie pojazdu
+app.delete('/deleteVehicle', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const vehicleId = req.headers['id'];
+    console.log("vehicleId: " + vehicleId)
+
+    if(vehicleId != ""){
+        const sqlInsert = "DELETE FROM vdb_vehicles WHERE Id like (?);"
+        db.query(sqlInsert, [vehicleId], (err, result) => {
             console.log(result)
         })
     } else {
