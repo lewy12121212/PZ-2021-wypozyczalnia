@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 25 Kwi 2021, 21:03
+-- Czas generowania: 11 Maj 2021, 09:10
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.10
 
@@ -87,7 +87,9 @@ CREATE TABLE `vdb_repairs` (
 INSERT INTO `vdb_repairs` (`Id`, `Reparer_id`, `Vehicle_id`, `Replaced_parts`, `Activities_performed`) VALUES
 (1, 2, 3, 'uszczelka pod głowicą, olej, filtr kabinowy', 'dokonano wymiany filtru kabinowego oraz oleju, wymieniono uszczelkę pod głowicą'),
 (2, 2, 3, 'filtr oleju, filtr powietrza, filtr paliwa', 'dokonano wymiany filtrów'),
-(3, 2, 2, 'Przednia szyba, lewe lustro', 'dokonano wymiany przedniej szyby oraz lewego lusterka.');
+(3, 2, 2, 'Przednia szyba, lewe lustro', 'dokonano wymiany przedniej szyby oraz lewego lusterka.'),
+(8, 3, 4, 'asd', 'asd'),
+(10, 3, 3, 'naprawiony ', 'bardzo dobrze');
 
 --
 -- Wyzwalacze `vdb_repairs`
@@ -120,7 +122,8 @@ CREATE TABLE `vdb_users` (
 
 INSERT INTO `vdb_users` (`Id`, `Name`, `Surname`, `Login`, `Password`, `Type`) VALUES
 (1, 'Admin', 'Admin', 'Admin', 'zaq1@WSX', 'administrator'),
-(2, 'Serwisant', 'Serwisant', 'Serwisant', 'Serwisantzaq1', 'serwisant');
+(2, 'Serwisant', 'Serwisant', 'Serwisant', 'Serwisantzaq1', 'serwisant'),
+(3, 'asd', 'asd', 'asd', 'asd', 'serwisant');
 
 -- --------------------------------------------------------
 
@@ -143,12 +146,12 @@ CREATE TABLE `vdb_vehicles` (
 
 INSERT INTO `vdb_vehicles` (`Id`, `Name`, `Model`, `Type`, `Engine_capacity`, `State`) VALUES
 (1, 'VW', 'Transporter', 'VAN', 1.8, 'wypożyczony'),
-(2, 'Scania', 'camper', 'Camper', 2, 'dostępny'),
+(2, 'Scania', 'camper', 'Camper', 2, 'w naprawie'),
 (3, 'VW', 'Transporter', 'VAN', 1.8, 'dostępny'),
-(4, 'MAN', 'camper', 'Camper', 2, 'oczekujący'),
-(5, 'MAN', 'xyz', 'Sedan', 2.2, 'wypożyczony'),
+(4, 'MAN', 'camper', 'Camper', 2, 'w naprawie'),
+(5, 'MAN', 'xyz', 'Sedan', 2.2, 'w naprawie'),
 (6, 'Volvo', 'vfr', 'Sedan', 1.6, 'wypożyczony'),
-(7, 'MAN', 'xyz', 'Sedan', 2.2, 'w naprawie'),
+(7, 'MAN', 'xyz', 'Sedan', 2.2, 'dostępny'),
 (8, 'Volvo', 'vfr', 'Sedan', 1.6, 'oczekujący');
 
 -- --------------------------------------------------------
@@ -172,8 +175,8 @@ CREATE TABLE `vdb_vehicle_rentals` (
 
 INSERT INTO `vdb_vehicle_rentals` (`Id`, `Customer_id`, `Vehicle_id`, `Rent_data`, `Return_data`, `State`) VALUES
 (1, 1, 1, '2021-04-25', '2021-05-30', 'aktywne'),
-(2, 5, 6, '2021-04-23', '2021-06-16', 'aktywne'),
-(4, 2, 5, '2021-04-18', '2021-06-15', 'aktywne'),
+(2, 5, 6, '2021-04-23', '2021-06-16', 'zamknięte'),
+(4, 2, 5, '2021-04-18', '2021-06-15', 'zamknięte'),
 (5, 2, 5, '2021-04-18', '2021-06-15', 'aktywne');
 
 --
@@ -250,13 +253,13 @@ ALTER TABLE `vdb_customer`
 -- AUTO_INCREMENT dla tabeli `vdb_repairs`
 --
 ALTER TABLE `vdb_repairs`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT dla tabeli `vdb_users`
 --
 ALTER TABLE `vdb_users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT dla tabeli `vdb_vehicles`
