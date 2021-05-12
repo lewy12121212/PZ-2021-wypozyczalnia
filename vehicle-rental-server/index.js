@@ -85,7 +85,7 @@ app.get('/getUsersInfo', (req, res) => {
     })
 });
 
-//zwracanie listy użytkowników danego typu
+//zwracanie listy użytkowników
 app.get('/getAllUsersInfo', (req, res) => { 
     const sqlSelect = "SELECT * FROM vdb_users;"
     db.query(sqlSelect, (err, result) => {
@@ -193,6 +193,52 @@ app.delete('/deleteVehicle', (req, res) => { //req -> do pobrania danych z front
 
 });
 
+//zwracanie listy klientów
+app.get('/getAllClientInfo', (req, res) => { 
+    const sqlSelect = "SELECT * FROM vdb_customer;"
+    db.query(sqlSelect, (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
+//dodawanie klienta
+app.post('/insertClient', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const name = req.body.name
+    const surname = req.body.surname
+    const phone = req.body.phone
+    const mail = req.body.mail
+
+    console.log(name, surname, phone, mail)
+
+    if(name != "" && surname != "" && phone != "" && mail != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "INSERT INTO vdb_customer (Name, Surname, Phone_number, Mail) VALUES (?,?,?,?);"
+        db.query(sqlInsert, [name, surname, phone, mail], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+});
+
+app.delete('/deleteClient', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const clientId = req.headers['id'];
+    console.log("userId: " + clientId)
+
+    if(clientId != ""){
+        const sqlInsert = "DELETE FROM vdb_customer WHERE Id like (?);"
+        db.query(sqlInsert, [clientId], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+
+});
+
 ////////////////////////////////////////////////////////////////////
 //test EndPoint
 app.get('/getVehicle', (req, res) => { 
@@ -205,7 +251,7 @@ app.get('/getVehicle', (req, res) => {
 });
 
 //test EndPoint
-app.post('/insertVehicle', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+app.post('/insertVehicletest', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
     
     const vehicleName = req.body.vehicleName
     const vehicleModel = req.body.vehicleModel

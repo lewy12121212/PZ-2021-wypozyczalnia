@@ -29,7 +29,7 @@ const DelVehicle = (props) => {
         <div className="container option_panel_box d-flex justify-content-center">
             <table className="col-10 center-block text-center">
                 <tr>
-                    <th><h5>Usuń użytkownika</h5></th>
+                    <th><h5>Usuń pojazd</h5></th>
                 </tr>
                 <tr>
                     <td>
@@ -47,7 +47,7 @@ const DelVehicle = (props) => {
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="button" className="btn btn-danger" value="usuń użytkownika" onClick={submitDelVehicle}></input></td>
+                    <td><input type="button" className="btn btn-danger" value="usuń pojazd" onClick={submitDelVehicle}></input></td>
                 </tr>
             </table>
         </div>

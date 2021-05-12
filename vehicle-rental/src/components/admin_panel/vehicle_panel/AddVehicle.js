@@ -46,7 +46,7 @@ const AddVehicle = (props) => {
         <div className="container option_panel_box d-flex justify-content-center">
             <table className="col-10 center-block text-center">
                 <tr>
-                    <th colspan="2"><h5>Dodaj użytkownika</h5></th>
+                    <th colspan="2"><h5>Dodaj pojazd</h5></th>
                 </tr>
                 <tr>
                     <td>Nazwa:</td>
@@ -90,7 +90,7 @@ const AddVehicle = (props) => {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="button" className="btn btn-success" value="dodaj użytkownika" onClick={submitAddVehicle}></input></td>
+                    <td colspan="2"><input type="button" className="btn btn-success" value="dodaj pojazd" onClick={submitAddVehicle}></input></td>
                 </tr>
             </table>
         </div>
