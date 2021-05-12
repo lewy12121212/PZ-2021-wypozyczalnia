@@ -223,6 +223,7 @@ app.post('/insertClient', (req, res) => { //req -> do pobrania danych z frontend
     }
 });
 
+// usuwanie klienta
 app.delete('/deleteClient', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
     
     const clientId = req.headers['id'];
@@ -237,6 +238,26 @@ app.delete('/deleteClient', (req, res) => { //req -> do pobrania danych z fronte
         console.log("empty data to database :(")
     }
 
+});
+
+//zwracanie pełnej listy napraw
+app.get('/getAllRepairsInfo', (req, res) => { 
+
+    const sqlSelect = "SELECT * FROM vdb_repairs"
+    db.query(sqlSelect, (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
+//zwracanie pełnej listy wpożyczeń
+app.get('/getAllRentalsInfo', (req, res) => { 
+
+    const sqlSelect = "SELECT * FROM vdb_vehicle_rentals"
+    db.query(sqlSelect, (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
 });
 
 ////////////////////////////////////////////////////////////////////
