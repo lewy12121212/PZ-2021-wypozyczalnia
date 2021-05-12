@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style.css'
+import Cloudinary from '../../cloudinary/cloudinary'
 
 const AddVehicle = (props) => {
 
@@ -87,6 +88,12 @@ const AddVehicle = (props) => {
                         <input type="number" onChange={(e) => {
                             setEngine(e.target.value)
                         }}></input>    
+                    </td>
+                </tr>
+                <tr>
+                    <td>Zdjęcie:</td>
+                    <td>
+                        <Cloudinary />   
                     </td>
                 </tr>
                 <tr>
