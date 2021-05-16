@@ -91,9 +91,9 @@ class AdminPanel extends React.Component {
           />
         }
 
-        {this.state.visable_client_panel && <ClientPanel triggerShowMainPanel={this.triggerShowMainPanel} />}
-        {this.state.visable_vehice_panel && <VehiclePanel triggerShowMainPanel={this.triggerShowMainPanel} />}
         {this.state.visable_user_panel && <UsersPanel triggerShowMainPanel={this.triggerShowMainPanel} />}
+        {this.state.visable_vehice_panel && <VehiclePanel triggerShowMainPanel={this.triggerShowMainPanel} />}
+        {this.state.visable_client_panel && <ClientPanel triggerShowMainPanel={this.triggerShowMainPanel} />}
         {this.state.visable_history_panel && <HistoryPanel triggerShowMainPanel={this.triggerShowMainPanel}/>}
         
 
