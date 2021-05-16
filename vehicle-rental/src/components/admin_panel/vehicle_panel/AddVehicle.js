@@ -10,6 +10,7 @@ const AddVehicle = (props) => {
     const [model, setModel] = useState('')
     const [type, setType] = useState('')
     const [engine, setEngine] = useState('')
+    const [img, setImg] = useState('')
     const state = "dostępny"
 
     const [vehicleData, setVehicleData] = useState([])
@@ -21,10 +22,11 @@ const AddVehicle = (props) => {
             model: model,
             type: type,
             engine: engine,
-            state: state
+            state: state,
+            img: img
         });
     
-        if(name !== "" && model !== "" && type !== "" && engine !== "" && state !== ""){
+        if(name !== "" && model !== "" && type !== "" && engine !== "" && state !== "" && img !== ""){
             setVehicleData([
                 ...vehicleData, 
                 {   
@@ -32,10 +34,11 @@ const AddVehicle = (props) => {
                     Model: model,
                     Type: type,
                     Engine_capacity: engine,
-                    State: state
+                    State: state,
+                    Img: img
                 }
             ]);
-            alert("Poprawnie dodano użytkownika :)")
+            alert("Poprawnie dodano pojazd :)")
             props.refresh()
         } else {
             alert("Niektóre dane są puste :/")
@@ -93,7 +96,7 @@ const AddVehicle = (props) => {
                 <tr>
                     <td>Zdjęcie:</td>
                     <td>
-                        <Cloudinary />   
+                        <Cloudinary setImg={setImg}/>   
                     </td>
                 </tr>
                 <tr>
