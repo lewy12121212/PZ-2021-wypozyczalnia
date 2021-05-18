@@ -261,6 +261,13 @@ app.get('/getAllRentalsInfo', (req, res) => {
     })
 });
 
+//zwracanie listy dostępnych pojazdów z tabeli vdb_vehicles
+app.get('/getAvailableVehicleList', (req, res) => { 
+    const sqlSelect = "SELECT * FROM vdb_vehicles WHERE State like 'dostępny'"
+    db.query(sqlSelect, (err, result) => {
+        res.send(result)
+    })
+});
 ////////////////////////////////////////////////////////////////////
 //test EndPoint
 app.get('/getVehicle', (req, res) => { 

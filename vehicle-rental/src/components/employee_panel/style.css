@@ -18,3 +18,19 @@
     font-weight: bold;
     border-radius: 30px;
 }
+
+.VehicleItemHover:hover{
+    box-shadow: 0 0px 16px 0 rgba(0, 255, 76, 0.767), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.SingleVehicleItem{
+    margin: 10px;
+    padding: 10px;
+    transition-duration:250ms;
+    height: auto;
+}
+
+.box h5{
+    padding: 1px;
+    margin: 1px;
+}
