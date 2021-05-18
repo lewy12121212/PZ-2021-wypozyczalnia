@@ -20,7 +20,7 @@ const AvailableVehicleList = (props) => {
             {vehicleList.map((val) => {
                 return (
                     <div>
-                        <VehicleItem vehicle={val} /> 
+                        <VehicleItem vehicle={val} ChooseVehicle={props.ChooseVehicle} /> 
                     </div>
                 ); // przekazanie parametrów do komponentu pojedynczego "itemu"
             })}

@@ -1,23 +1,18 @@
-import React, { useState }  from 'react'
+import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../components_style/style.css'
 import '../style.css'
 
 const VehicleItem = (props) => {
 
-
-    const handleInfoClick = () => {
-        this.setState({height_style: "100px"})
-    }
-
-    const handleChooseVehiceClick = () => {
-        props.triggerChooseVehice(props.vehicle);
+    const handleChooseVehicleClick = () => {
+        props.ChooseVehicle(props.vehicle)
     }
 
     return (
         
-        <div className="SingleVehicleItem VehicleItemHover" onClick={handleChooseVehiceClick}>
-            <div className="container row">
+        <div className="SingleVehicleItem VehicleItemHover">
+            <div className="container row" onClick={handleChooseVehicleClick}>
                 <div className="col-2 box">
                     <img src={props.vehicle['Img']} style={{height: '100px'}} alt="Zdjęcie pojazdu"/>
                 </div>
@@ -30,7 +25,7 @@ const VehicleItem = (props) => {
                     <h5>Pojemość silnika: {props.vehicle['Engine_capacity']}</h5>
                 </div>
                 <div className="col-2 align-self-center box">
-                    <button className="btn btn-warning" onClick={handleInfoClick}>Informacje</button>
+                    <button className="btn btn-warning">Informacje</button>
                 </div>
 
             </div>

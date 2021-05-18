@@ -20,7 +20,7 @@
 }
 
 .VehicleItemHover:hover{
-    box-shadow: 0 0px 16px 0 rgba(0, 255, 76, 0.767), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 0px 16px 0 rgba(9, 255, 0, 0.767), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .SingleVehicleItem{
@@ -33,4 +33,20 @@
 .box h5{
     padding: 1px;
     margin: 1px;
+}
+
+.btn-back{
+    margin: 5px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.date-box input{
+    margin: 15px;
+    font-size: 20px;
+
+}
+
+.form-select{
+    font-size: 20px;
 }

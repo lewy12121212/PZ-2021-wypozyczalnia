@@ -44,7 +44,7 @@ const AddClient = (props) => {
 
     return (
         <div className="container option_panel_box d-flex justify-content-center">
-            <table className="col-10 center-block text-center">
+            <table className="col-8 center-block text-center">
                 <tr>
                     <th colspan="2"><h5>Dodaj klientów</h5></th>
                 </tr>
