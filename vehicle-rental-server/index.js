@@ -85,7 +85,7 @@ app.get('/getUsersInfo', (req, res) => {
     })
 });
 
-//zwracanie listy użytkowników danego typu
+//zwracanie listy użytkowników
 app.get('/getAllUsersInfo', (req, res) => { 
     const sqlSelect = "SELECT * FROM vdb_users;"
     db.query(sqlSelect, (err, result) => {
@@ -135,7 +135,6 @@ app.post('/insertUser', (req, res) => { //req -> do pobrania danych z frontend /
     } else {
         console.log("empty data to database :(")
     }
-
 });
 
 //usuwanie użytkownika
@@ -155,6 +154,112 @@ app.delete('/deleteUser', (req, res) => { //req -> do pobrania danych z frontend
 
 });
 
+//dodawanie pojazdu
+app.post('/insertVehicle', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const name = req.body.name
+    const model = req.body.model
+    const type = req.body.type
+    const engine = req.body.engine
+    const state = req.body.state
+
+    console.log(name, model, type, engine, state)
+
+    if(name != "" && model != "" && type != "" && engine != "" && state != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "INSERT INTO vdb_vehicles (Name, Model, Type, Engine_capacity, State) VALUES (?,?,?,?,?);"
+        db.query(sqlInsert, [name, model, type, engine, state], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+});
+
+//usuwanie pojazdu
+app.delete('/deleteVehicle', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const vehicleId = req.headers['id'];
+    console.log("vehicleId: " + vehicleId)
+
+    if(vehicleId != ""){
+        const sqlInsert = "DELETE FROM vdb_vehicles WHERE Id like (?);"
+        db.query(sqlInsert, [vehicleId], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+
+});
+
+//zwracanie listy klientów
+app.get('/getAllClientInfo', (req, res) => { 
+    const sqlSelect = "SELECT * FROM vdb_customer;"
+    db.query(sqlSelect, (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
+//dodawanie klienta
+app.post('/insertClient', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const name = req.body.name
+    const surname = req.body.surname
+    const phone = req.body.phone
+    const mail = req.body.mail
+
+    console.log(name, surname, phone, mail)
+
+    if(name != "" && surname != "" && phone != "" && mail != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "INSERT INTO vdb_customer (Name, Surname, Phone_number, Mail) VALUES (?,?,?,?);"
+        db.query(sqlInsert, [name, surname, phone, mail], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+});
+
+// usuwanie klienta
+app.delete('/deleteClient', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const clientId = req.headers['id'];
+    console.log("userId: " + clientId)
+
+    if(clientId != ""){
+        const sqlInsert = "DELETE FROM vdb_customer WHERE Id like (?);"
+        db.query(sqlInsert, [clientId], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+
+});
+
+//zwracanie pełnej listy napraw
+app.get('/getAllRepairsInfo', (req, res) => { 
+
+    const sqlSelect = "SELECT * FROM vdb_repairs"
+    db.query(sqlSelect, (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
+//zwracanie pełnej listy wpożyczeń
+app.get('/getAllRentalsInfo', (req, res) => { 
+
+    const sqlSelect = "SELECT * FROM vdb_vehicle_rentals"
+    db.query(sqlSelect, (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
 ////////////////////////////////////////////////////////////////////
 //test EndPoint
 app.get('/getVehicle', (req, res) => { 
@@ -167,7 +272,7 @@ app.get('/getVehicle', (req, res) => {
 });
 
 //test EndPoint
-app.post('/insertVehicle', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+app.post('/insertVehicletest', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
     
     const vehicleName = req.body.vehicleName
     const vehicleModel = req.body.vehicleModel
