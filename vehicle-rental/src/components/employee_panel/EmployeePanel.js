@@ -3,6 +3,7 @@ import '../../components_style/style.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css'
 import AddNewRent from './add_new_rent/AddNewRent'
+import EndRent from './end_rent/EndRent'
 
 class EmployeePanel extends React.Component {
 
@@ -98,6 +99,7 @@ class EmployeePanel extends React.Component {
         }
 
         {this.state.visable_add_new_rent && <AddNewRent ShowEmployeePanel={this.triggerShowEmployeePanel}/>}
+        {this.state.visable_end_rent && <EndRent ShowEmployeePanel={this.triggerShowEmployeePanel}/>}
 
 
       </div>      

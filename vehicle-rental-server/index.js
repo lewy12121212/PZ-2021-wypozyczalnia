@@ -62,7 +62,7 @@ app.get('/getVehicleList', (req, res) => {
     })
 });
 
-// zwrócenie struktury tabeli na podstawie nazwy
+//zwrócenie struktury tabeli na podstawie nazwy
 app.get('/getTableStructure', (req, res) => { 
     const vehicleName = req.headers['table'];
     console.log(vehicleName)
@@ -224,7 +224,7 @@ app.post('/insertClient', (req, res) => { //req -> do pobrania danych z frontend
     }
 });
 
-// usuwanie klienta
+//usuwanie klienta
 app.delete('/deleteClient', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
     
     const clientId = req.headers['id'];
@@ -318,6 +318,50 @@ app.post('/insertVehicleRental', (req, res) => { //req -> do pobrania danych z f
         console.log("empty data to database :(")
     }
 });
+
+//zwracanie listy aktywnych wypożyczeń
+app.get('/getOpenRents', (req, res) => { 
+    const sqlSelect = "SELECT * FROM vdb_vehicle_rentals WHERE State LIKE 'aktywne';"
+    db.query(sqlSelect, (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
+//zakończenie wynajmu
+app.post('/endRental', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const rentId = req.body.rent
+    console.log(rentId)
+
+    if(rentId != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "UPDATE vdb_vehicle_rentals SET State = 'zamknięte' WHERE Id LIKE (?)"
+        db.query(sqlInsert, [rentId], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+});
+
+//zmiana statusu pojazdu ,na naprawiane
+app.post('/setVehicleRepair', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const vehicleId = req.body.fixVehicle
+    console.log(vehicleId)
+
+    if(vehicleId != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "UPDATE vdb_vehicles SET State = 'w naprawie' WHERE Id LIKE (?)"
+        db.query(sqlInsert, [vehicleId], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+});
+
 
 //app.get('/addVehicleTest', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
 //    const sqlInsert = "INSERT INTO testTable (Name, Model) VALUES ('TestData','TestData');"
