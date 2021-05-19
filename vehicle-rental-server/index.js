@@ -297,6 +297,28 @@ app.post('/insertVehicletest', (req, res) => { //req -> do pobrania danych z fro
 
 });
 
+//dodawanie wypożyczenia
+app.post('/insertVehicleRental', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const clientId = req.body.client
+    const vehicleId = req.body.vehicle
+    const startData = req.body.startDate
+    const endDate = req.body.endDate
+    const state = "aktywne"
+
+    console.log(clientId, vehicleId, startData, endDate)
+
+    if(clientId != "" && vehicleId != "" && startData != "" && endDate != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "INSERT INTO vdb_vehicle_rentals (Customer_id, Vehicle_id, Rent_data, Return_data, State) VALUES (?,?,?,?,?);"
+        db.query(sqlInsert, [clientId, vehicleId, startData, endDate, state], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+});
+
 //app.get('/addVehicleTest', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
 //    const sqlInsert = "INSERT INTO testTable (Name, Model) VALUES ('TestData','TestData');"
 //    db.query(sqlInsert, (err, result) => {
