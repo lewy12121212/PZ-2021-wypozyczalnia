@@ -1,4 +1,5 @@
 import React from 'react';
+import Axios from 'axios'
 import '../../../components_style/style.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style.css'
@@ -11,7 +12,7 @@ class AddNewRent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            vehicle: null
+            vehicle: null,
         };
     }
 
@@ -27,7 +28,18 @@ class AddNewRent extends React.Component {
                 vehicle: null
             })
         }
+    }
 
+    addVehicleRental = (client, startDate, endDate) => {
+        if(client !== "" && startDate !== null && endDate !== null){
+            Axios.post('http://localhost:3001/insertVehicleRental', {
+                client: client,
+                vehicle: this.state.vehicle.Id,
+                startDate: startDate,
+                endDate: endDate
+            });
+            alert("Poprawnie dodano wypożyczenie :)")
+        }
     }
 
     render() {
@@ -51,7 +63,7 @@ class AddNewRent extends React.Component {
                     <VehicleItem vehicle={this.state.vehicle} ChooseVehicle={this.triggerChooseVehicle}/>
                     <hr className="col-10"></hr>
                     <h5>Wybierz klienta:</h5>
-                    <ChooseClient />
+                    <ChooseClient ShowEmployeePanel={this.props.ShowEmployeePanel} addVehicleRental={this.addVehicleRental}/>
                     <hr className="col-10"></hr>
                     <bottom className="btn btn-warning btn-back" onClick={this.props.ShowEmployeePanel}>Powrót</bottom>
                 </div>      

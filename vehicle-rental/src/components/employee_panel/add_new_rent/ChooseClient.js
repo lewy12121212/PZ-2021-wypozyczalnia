@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../components_style/style.css'
 import '../style.css'
 import AddClient from '../../admin_panel/client_panel/AddClient'
-import Calendar from './Calendar'
 
 class ChooseClient extends React.Component {
 
@@ -67,6 +66,11 @@ class ChooseClient extends React.Component {
         })
     }
 
+    addVehicleRental = () => {
+        this.props.addVehicleRental(this.state.client, this.state.startDate, this.state.endDate)
+        this.props.ShowEmployeePanel()
+    }
+
     render() {
 
         if(this.state.client === ""){
@@ -78,7 +82,7 @@ class ChooseClient extends React.Component {
                         <option selected value={null}>Dodaj nowego klienta lub wybierz z listy:</option>
                         {this.state.clientsList.map((val) => {
                             return (
-                                <option value={val}>{val.Id}. {val.Name} {val.Surname} {val.Phone_number} {val.Mail}</option>
+                                <option value={val.Id}>{val.Id}. {val.Name} {val.Surname} {val.Phone_number} {val.Mail}</option>
                             )
                         })}
                     </select>
@@ -95,7 +99,7 @@ class ChooseClient extends React.Component {
                         <option selected value="">Dodaj nowego klienta lub wybierz z listy:</option>
                         {this.state.clientsList.map((val) => {
                             return (
-                                <option value={val}>{val.Id}. {val.Name} {val.Surname} {val.Phone_number} {val.Mail}</option>
+                                <option value={val.Id}>{val.Id}. {val.Name} {val.Surname} {val.Phone_number} {val.Mail}</option>
                             )
                         })}
                     </select>
@@ -110,7 +114,7 @@ class ChooseClient extends React.Component {
                     </div>
 
                     <hr className="col-10"></hr>
-                    <button type="button" className="btn btn-success">Dodaj wypożyczenie</button>
+                    <button type="button" className="btn btn-success" onClick={this.addVehicleRental}>Dodaj wypożyczenie</button>
                 </div>
             )
         } 
