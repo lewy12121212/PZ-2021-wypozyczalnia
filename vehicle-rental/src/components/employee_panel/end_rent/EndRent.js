@@ -63,7 +63,7 @@ class EndRent extends React.Component {
     }
 
     render() {
-
+        
         return(
             <div className="container column justify-content-center">
                 <div className="col">

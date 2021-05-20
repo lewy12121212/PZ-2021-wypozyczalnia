@@ -20,11 +20,11 @@ const AvailableVehicleList = (props) => {
             {vehicleList.map((val) => {
                 return (
                     <div>
+                        <label><input type="checkbox" value={val.Id}></input></label>
                         <VehicleItem vehicle={val} ChooseVehicle={props.ChooseVehicle} /> 
                     </div>
                 ); // przekazanie parametrów do komponentu pojedynczego "itemu"
             })}
-            <button className="btn btn-success">Generuj broszurę pdf</button>
         </div>
     );
 }
