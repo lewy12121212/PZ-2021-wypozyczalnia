@@ -23,6 +23,7 @@ const VehicleItem = (props) => {
             <h2>{props.vehicle['Name']}</h2>
             <p>
                 <h5>{props.vehicle['Model']}</h5>
+                <img src={props.vehicle['Img']} style={{height: '200px'}} alt="Zdjęcie pojazdu"/>
             </p>
             <div className="input-group mb-3 singleCard">
                 <button className="btn btn-warning" onClick={handleInfoClick}>Informacje</button>

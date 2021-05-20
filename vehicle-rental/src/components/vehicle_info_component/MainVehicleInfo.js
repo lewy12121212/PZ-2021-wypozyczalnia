@@ -20,6 +20,7 @@ const RentalsInfo = (props) => {
                 <h5>Type: {val.Type}</h5>
                 <h5>Engine capacity: {val.Engine_capacity}</h5>
                 <h5>State: {val.State}</h5>
+                <img src={val.Img} style={{height: '200px'}} alt="Zdjęcie pojazdu"/>
                 </div>
             )
             })}

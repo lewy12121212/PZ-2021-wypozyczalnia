@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style.css'
+import Cloudinary from '../../cloudinary/cloudinary'
 
 const AddVehicle = (props) => {
 
@@ -9,6 +10,7 @@ const AddVehicle = (props) => {
     const [model, setModel] = useState('')
     const [type, setType] = useState('')
     const [engine, setEngine] = useState('')
+    const [img, setImg] = useState('')
     const state = "dostępny"
 
     const [vehicleData, setVehicleData] = useState([])
@@ -20,10 +22,11 @@ const AddVehicle = (props) => {
             model: model,
             type: type,
             engine: engine,
-            state: state
+            state: state,
+            img: img
         });
     
-        if(name !== "" && model !== "" && type !== "" && engine !== "" && state !== ""){
+        if(name !== "" && model !== "" && type !== "" && engine !== "" && state !== "" && img !== ""){
             setVehicleData([
                 ...vehicleData, 
                 {   
@@ -31,10 +34,11 @@ const AddVehicle = (props) => {
                     Model: model,
                     Type: type,
                     Engine_capacity: engine,
-                    State: state
+                    State: state,
+                    Img: img
                 }
             ]);
-            alert("Poprawnie dodano użytkownika :)")
+            alert("Poprawnie dodano pojazd :)")
             props.refresh()
         } else {
             alert("Niektóre dane są puste :/")
@@ -46,7 +50,7 @@ const AddVehicle = (props) => {
         <div className="container option_panel_box d-flex justify-content-center">
             <table className="col-10 center-block text-center">
                 <tr>
-                    <th colspan="2"><h5>Dodaj użytkownika</h5></th>
+                    <th colspan="2"><h5>Dodaj pojazd</h5></th>
                 </tr>
                 <tr>
                     <td>Nazwa:</td>
@@ -90,7 +94,13 @@ const AddVehicle = (props) => {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="button" className="btn btn-success" value="dodaj użytkownika" onClick={submitAddVehicle}></input></td>
+                    <td>Zdjęcie:</td>
+                    <td>
+                        <Cloudinary setImg={setImg}/>   
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="button" className="btn btn-success" value="dodaj pojazd" onClick={submitAddVehicle}></input></td>
                 </tr>
             </table>
         </div>

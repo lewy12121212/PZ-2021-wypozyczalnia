@@ -162,13 +162,14 @@ app.post('/insertVehicle', (req, res) => { //req -> do pobrania danych z fronten
     const type = req.body.type
     const engine = req.body.engine
     const state = req.body.state
+    const img = req.body.img
 
-    console.log(name, model, type, engine, state)
+    console.log(name, model, type, engine, state, img)
 
-    if(name != "" && model != "" && type != "" && engine != "" && state != ""){
+    if(name != "" && model != "" && type != "" && engine != "" && state != "" && img != ""){
         //console.log("ojć" + vehicleName +", "+ vehicleModel)
-        const sqlInsert = "INSERT INTO vdb_vehicles (Name, Model, Type, Engine_capacity, State) VALUES (?,?,?,?,?);"
-        db.query(sqlInsert, [name, model, type, engine, state], (err, result) => {
+        const sqlInsert = "INSERT INTO vdb_vehicles (Name, Model, Type, Engine_capacity, State, Img) VALUES (?,?,?,?,?,?);"
+        db.query(sqlInsert, [name, model, type, engine, state, img], (err, result) => {
             console.log(result)
         })
     } else {
