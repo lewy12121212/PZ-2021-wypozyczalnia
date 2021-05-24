@@ -5,13 +5,23 @@ import '../style.css'
 
 const VehicleItem = (props) => {
 
+    var chooseState = false
+
     const handleChooseVehicleClick = () => {
-        props.ChooseVehicle(props.vehicle)
+        if(chooseState === false){
+            props.ChooseVehicle(props.vehicle)
+            document.getElementById(props.vehicle['Id']).style.background="rgba(255,0,0,0.5)"
+            chooseState = true
+        } else if(chooseState === true){
+            props.RemoveChooseVehicle(props.vehicle)
+            document.getElementById(props.vehicle['Id']).style.background="rgba(255,255,255,0)"
+            chooseState = false
+        }
     }
 
     return (
         
-        <div className="SingleVehicleItem VehicleItemHover">
+        <div className="SingleVehicleItem VehicleItemHover" id={props.vehicle['Id']} onClick={handleChooseVehicleClick}>
             <div className="container row">
                 <div className="col-2 box">
                     <img src={props.vehicle['Img']} style={{height: '100px'}} alt="Zdjęcie pojazdu"/>
