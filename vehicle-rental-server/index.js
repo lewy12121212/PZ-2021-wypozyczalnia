@@ -371,8 +371,22 @@ app.post('/setVehicleRepair', (req, res) => { //req -> do pobrania danych z fron
 //});
 
 app.post('/login', (req, res) => { // use daje możliwość jednoczesnej obsługi get i post
-    console.log("Use Login REQ")
-    res.send({token: 'token123'})
+
+    const login = req.body.login
+    const password = req.body.password
+
+    console.log(login + ":" + password)
+
+    if(login != "" && password != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "SELECT * FROM vdb_users WHERE Login like (?) AND Password like (?);"
+        db.query(sqlInsert,[login, password], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+
     //const login = req.body.login
     //const password = req.body.password
     //
