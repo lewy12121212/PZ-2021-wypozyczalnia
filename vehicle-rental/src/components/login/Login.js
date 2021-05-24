@@ -30,17 +30,17 @@ class Login extends React.Component {
   render() {
     return(
       <div className="login-wrapper">
-        <h1>Please Log In</h1>
+        <h1>Zaloguj się :)</h1>
         <label>
-            <p>Username</p>
+            <p>Login:</p>
             <input type="text" onChange={e => this.setLogin(e.target.value)}/>
         </label>
         <label>
-            <p>Password</p>
+            <p>Hasło:</p>
             <input type="password" onChange={e => this.setPassword(e.target.value)}/>
         </label>
         <div>
-            <button type="submit" onClick={() => this.props.SendLoginData(this.state.Login, this.state.Password)}>Submit</button>
+            <button type="submit" className="btn btn-success" onClick={() => this.props.SendLoginData(this.state.Login, this.state.Password)}>Submit</button>
         </div>
 
       </div>

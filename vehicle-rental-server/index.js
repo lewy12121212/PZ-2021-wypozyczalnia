@@ -382,6 +382,7 @@ app.post('/login', (req, res) => { // use daje możliwość jednoczesnej obsług
         const sqlInsert = "SELECT * FROM vdb_users WHERE Login like (?) AND Password like (?);"
         db.query(sqlInsert,[login, password], (err, result) => {
             console.log(result)
+            res.send(result)
         })
     } else {
         console.log("empty data to database :(")
