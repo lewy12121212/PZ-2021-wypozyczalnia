@@ -24,7 +24,6 @@ const AvailableVehicleList = (props) => {
                     </div>
                 ); // przekazanie parametrów do komponentu pojedynczego "itemu"
             })}
-            <button className="btn btn-success">Generuj broszurę pdf</button>
         </div>
     );
 }

@@ -40,7 +40,7 @@ class Login extends React.Component {
             <input type="password" onChange={e => this.setPassword(e.target.value)}/>
         </label>
         <div>
-            <button type="submit" className="btn btn-success" onClick={() => this.props.SendLoginData(this.state.Login, this.state.Password)}>Submit</button>
+            <button type="submit" className="btn btn-success" onClick={() => this.props.SendLoginData(this.state.Login, this.state.Password)}>Zaloguj</button>
         </div>
 
       </div>
