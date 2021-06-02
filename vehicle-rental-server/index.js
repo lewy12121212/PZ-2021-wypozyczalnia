@@ -1,5 +1,3 @@
-
-
 const express = require('express')
 const app = express()
 const mysql = require('mysql')
@@ -62,7 +60,7 @@ app.get('/getVehicleList', (req, res) => {
     })
 });
 
-// zwrócenie struktury tabeli na podstawie nazwy
+//zwrócenie struktury tabeli na podstawie nazwy
 app.get('/getTableStructure', (req, res) => { 
     const vehicleName = req.headers['table'];
     console.log(vehicleName)
@@ -224,7 +222,9 @@ app.post('/insertClient', (req, res) => { //req -> do pobrania danych z frontend
     }
 });
 
-// usuwanie klienta
+
+//usuwanie klienta
+
 app.delete('/deleteClient', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
     
     const clientId = req.headers['id'];
@@ -261,6 +261,14 @@ app.get('/getAllRentalsInfo', (req, res) => {
     })
 });
 
+//zwracanie listy dostępnych pojazdów z tabeli vdb_vehicles
+app.get('/getAvailableVehicleList', (req, res) => { 
+    const sqlSelect = "SELECT * FROM vdb_vehicles WHERE State like 'dostępny'"
+    db.query(sqlSelect, (err, result) => {
+        res.send(result)
+    })
+});
+
 ////////////////////////////////////////////////////////////////////
 //test EndPoint
 app.get('/getVehicle', (req, res) => { 
@@ -290,6 +298,72 @@ app.post('/insertVehicletest', (req, res) => { //req -> do pobrania danych z fro
 
 });
 
+//dodawanie wypożyczenia
+app.post('/insertVehicleRental', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const clientId = req.body.client
+    const vehicleId = req.body.vehicle
+    const startData = req.body.startDate
+    const endDate = req.body.endDate
+    const state = "aktywne"
+
+    console.log(clientId, vehicleId, startData, endDate)
+
+    if(clientId != "" && vehicleId != "" && startData != "" && endDate != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "INSERT INTO vdb_vehicle_rentals (Customer_id, Vehicle_id, Rent_data, Return_data, State) VALUES (?,?,?,?,?);"
+        db.query(sqlInsert, [clientId, vehicleId, startData, endDate, state], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+});
+
+//zwracanie listy aktywnych wypożyczeń
+app.get('/getOpenRents', (req, res) => { 
+    const sqlSelect = "SELECT * FROM vdb_vehicle_rentals WHERE State LIKE 'aktywne';"
+    db.query(sqlSelect, (err, result) => {
+        console.log(result)
+        res.send(result)
+    })
+});
+
+//zakończenie wynajmu
+app.post('/endRental', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const rentId = req.body.rent
+    console.log(rentId)
+
+    if(rentId != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "UPDATE vdb_vehicle_rentals SET State = 'zamknięte' WHERE Id LIKE (?)"
+        db.query(sqlInsert, [rentId], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+});
+
+//zmiana statusu pojazdu ,na naprawiane
+app.post('/setVehicleRepair', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const vehicleId = req.body.fixVehicle
+    console.log(vehicleId)
+
+    if(vehicleId != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "UPDATE vdb_vehicles SET State = 'w naprawie' WHERE Id LIKE (?)"
+        db.query(sqlInsert, [vehicleId], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+});
+
+
 //app.get('/addVehicleTest', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
 //    const sqlInsert = "INSERT INTO testTable (Name, Model) VALUES ('TestData','TestData');"
 //    db.query(sqlInsert, (err, result) => {
@@ -298,8 +372,23 @@ app.post('/insertVehicletest', (req, res) => { //req -> do pobrania danych z fro
 //});
 
 app.post('/login', (req, res) => { // use daje możliwość jednoczesnej obsługi get i post
-    console.log("Use Login REQ")
-    res.send({token: 'token123'})
+
+    const login = req.body.login
+    const password = req.body.password
+
+    console.log(login + ":" + password)
+
+    if(login != "" && password != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "SELECT * FROM vdb_users WHERE Login like (?) AND Password like (?);"
+        db.query(sqlInsert,[login, password], (err, result) => {
+            console.log(result)
+            res.send(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+
     //const login = req.body.login
     //const password = req.body.password
     //

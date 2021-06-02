@@ -8,7 +8,7 @@ const VehiclePanel = (props) => {
 
     return (
         <div>
-            <h4>Menadżer użytkowników</h4>
+            <h4>Menadżer pojazdów</h4>
             <div className="container">
                 <div className="row">
                     <div className="col">

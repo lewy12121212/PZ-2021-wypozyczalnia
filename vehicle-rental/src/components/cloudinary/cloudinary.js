@@ -24,6 +24,7 @@ const Cloudinary = (props) => {
         const file = await res.json()
         console.log(file)
 
+        props.setImg(file.secure_url) //set props for info to database
         setImage(file.secure_url) //secure_url to database!
         setLoading(false)
     }
@@ -32,12 +33,9 @@ const Cloudinary = (props) => {
         <div>
             <h4>Cloudinary upload</h4>
             <input type="file" name="file_upload" placeholder="Upload image" onChange={uploadImage}></input>
-            
             {loading?(<h3>Loading ...</h3>):(
-                <img src={image} style={{width:'300px'}}/>
+                <img src={image} style={{width:'300px'}} alt="zdjęcie pojazdu"/>
             )}
-            
-
         </div>
     )
 }

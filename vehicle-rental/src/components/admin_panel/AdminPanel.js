@@ -8,6 +8,7 @@ import HistoryPanel from './history_panel/HistoryPanel'
 import UsersPanel from './users_panel/UsersPanel'
 import VehiclePanel from './vehicle_panel/VehiclePanel'
 
+
 class AdminPanel extends React.Component {
 
   constructor(props) {
