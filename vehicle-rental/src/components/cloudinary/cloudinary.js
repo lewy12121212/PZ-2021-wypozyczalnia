@@ -23,6 +23,7 @@ const Cloudinary = (props) => {
 
         const file = await res.json()
         console.log(file)
+
         props.setImg(file.secure_url) //set props for info to database
         setImage(file.secure_url) //secure_url to database!
         setLoading(false)

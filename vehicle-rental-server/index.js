@@ -222,7 +222,9 @@ app.post('/insertClient', (req, res) => { //req -> do pobrania danych z frontend
     }
 });
 
+
 //usuwanie klienta
+
 app.delete('/deleteClient', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
     
     const clientId = req.headers['id'];
@@ -266,6 +268,7 @@ app.get('/getAvailableVehicleList', (req, res) => {
         res.send(result)
     })
 });
+
 ////////////////////////////////////////////////////////////////////
 //test EndPoint
 app.get('/getVehicle', (req, res) => { 
