@@ -47,7 +47,7 @@ const VehicleItem = (props) => {
             <div className="input-group mb-3 singleCard">
                 <button className="btn btn-warning" onClick={handleInfoClick}>Informacje</button>
                 <button className="btn btn-success" onClick={handleRepairInfoClick}>Zakończ serwisowanie</button>
-                <button className="btn btn-success" onClick={handleChangeStateClick}>Zmień status</button>
+                <button className="btn btn-primary" onClick={handleChangeStateClick}>Zmień status</button>
             </div>
         </div>
     );

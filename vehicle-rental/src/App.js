@@ -24,8 +24,9 @@ class App extends React.Component {
     super(props);
     var login = this.getCookie("login")
     var type = this.getCookie("type")
-
-    if(login != null && type != null){
+    console.log(typeof login + " : " + typeof type)
+    if(login !== '' && type !== ''){
+      console.log("null")
       this.state = {
         token: true,
         login: login,
@@ -33,35 +34,15 @@ class App extends React.Component {
         loginData: []
       }; 
     } else {
+      console.log("not null")
       this.state = {
         token: false,
-        login: login,
-        type: type,  
+        login: '',
+        type: '',  
         loginData: []
       }; 
     }
 
-    //alert("wszystko oki" + this.state.type + ": " + this.state.login + " " + this.state.token)
-    //this.setToken()
-    //var [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  }
-
-  setToken = () => {
-    var login = this.getCookie("login")
-    var type = this.getCookie("type")
-    console.log("setToken" + this.getCookie("login") + ":" + this.getCookie("type"))
-    if(login != null && type != null) {
-      this.setState({
-        ...this.state,
-        login: login,
-        type: type,
-        token: true
-      })
-      alert("wszystko oki" + this.state.type + ": " + this.state.login + " " + this.state.token)
-      console.log("wszystko oki: " + typeof type + ": " + type)
-    } else {
-      alert("coś poszło nie tak :/")
-    }
   }
 
   SendLoginData = (Login, Password) => {
@@ -168,52 +149,9 @@ class App extends React.Component {
         )
       }
 
-
-      //return (
-      //  <div className="wrapper">
-      //    <h1><center>Wypożyczalnia</center></h1>
-      //      <BrowserRouter>
-      //        <Switch>
-      //          <Route path="/AddDataForm">
-      //            <AddDataFrom />
-      //          </Route>
-      //          <Route path="/AdminPanel">
-      //            <AdminPanel />
-      //          </Route>
-      //          <Route path="/ServicePanel">
-      //            <ServicePanel />
-      //          </Route>
-      //          <Route path="/EmployeePanel">
-      //            <EmployeePanel />
-      //          </Route>
-      //        </Switch>
-      //      </BrowserRouter>
-      //  </div>
-      //  );
     }
   }
 
 }
-
-
-//return (
-//  <div>
-//    <h1>Zalogowano jako użytkownik:</h1>
-//      {this.state.loginData.map((val) => {
-//        return (
-//          <div>
-//            <h2>{val.Login}</h2>
-//            {val.Type}
-//          </div>
-//        )
-//      })}
-//  </div>
-//)
-
-//function App() {
-//  const [token, setToken] = useState();
-//  const [login, setLogin] = useState('');
-//  const [acconuntType, setAccountType] = useState('');
-//}
 
 export default App;

@@ -44,6 +44,11 @@ class ChooseClient extends React.Component {
     }
 
     triggerShowMainPanel = () => {
+        this.setState({
+            ...this.state,
+            clientsList: []
+        })
+
         Axios.get('http://localhost:3001/getAllClientInfo').then((response) => {
             this.setState({
                 ...this.state,

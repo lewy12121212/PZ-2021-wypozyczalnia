@@ -8,7 +8,7 @@ import VehicleItem from './VehicleItem';
 const VehicleList = (props) => {
 
     const [vehicleList, setVehiceList] = useState([])
-    const [forRefresh, setForRefresh] = useState(false)
+    //const [forRefresh, setForRefresh] = useState(false)
 
     useEffect(()=> {
         Axios.get('http://localhost:3001/getVehicleList').then((response) => {
@@ -21,12 +21,11 @@ const VehicleList = (props) => {
             setVehiceList(response.data)
         })
 
-        if(this.for_refresh === false){
-            setForRefresh(true)
-        } else {
-            setForRefresh(false)
-        }
-
+        //if(this.for_refresh === false){
+        //    setForRefresh(true)
+        //} else {
+        //    setForRefresh(false)
+        //}
         props.triggerRefreshPanel()
     }
 

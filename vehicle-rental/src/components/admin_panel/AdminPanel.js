@@ -31,6 +31,7 @@ class AdminPanel extends React.Component {
       visable_client_panel: false,
       visable_history_panel: false
     })
+    //window.location.reload();
   }
 
   triggerShowUserPanel = () => {

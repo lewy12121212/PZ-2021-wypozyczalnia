@@ -204,9 +204,10 @@ app.get('/getAllClientInfo', (req, res) => {
 //dodawanie klienta
 app.post('/insertClient', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
     
+    console.log("add client!")
     const name = req.body.name
     const surname = req.body.surname
-    const phone = req.body.phone
+    const phone = req.body.phoneNumber
     const mail = req.body.mail
 
     console.log(name, surname, phone, mail)

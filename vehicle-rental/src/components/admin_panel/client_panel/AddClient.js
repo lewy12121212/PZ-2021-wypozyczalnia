@@ -15,15 +15,7 @@ const AddClient = (props) => {
 
     const submitAddClient = () => { // to instert data
 
-
-        Axios.post('http://localhost:3001/insertClient', {
-            name: name,
-            surname: surname,
-            phoneNumber: phoneNumber,
-            mail: mail
-        });
-    
-        if(name !== "" && surname !== "" && phoneNumber !== "" && mail !== ""){
+        if(name !== "" && surname !== "" && phoneNumber !== "" && mail !== "" && phoneNumber.length <= 9){
             setClientData([
                 ...clientData, 
                 {   
@@ -33,10 +25,18 @@ const AddClient = (props) => {
                     Mail: mail,
                 }
             ]);
+
+            Axios.post('http://localhost:3001/insertClient', {
+                name: name,
+                surname: surname,
+                phoneNumber: phoneNumber,
+                mail: mail
+            });
+
             alert("Poprawnie dodano klienta :)")
             props.refresh()
         } else {
-            alert("Niektóre dane są puste :/")
+            alert("Niektóre dane nie są poprawne :/")
             console.log("undefined data of client :(")
         }
         

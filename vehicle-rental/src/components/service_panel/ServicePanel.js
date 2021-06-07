@@ -61,7 +61,8 @@ class ServicePanel extends React.Component {
         for_refresh: false
       })
     }
-
+    //
+    //this.setState({ for_refresh: "React Component Updated - " + new Date() });
     window.location.reload();
   }
 
