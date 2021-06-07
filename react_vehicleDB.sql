@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 11 Maj 2021, 09:10
+-- Czas generowania: 07 Cze 2021, 16:29
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.10
 
@@ -85,11 +85,11 @@ CREATE TABLE `vdb_repairs` (
 --
 
 INSERT INTO `vdb_repairs` (`Id`, `Reparer_id`, `Vehicle_id`, `Replaced_parts`, `Activities_performed`) VALUES
-(1, 2, 3, 'uszczelka pod głowicą, olej, filtr kabinowy', 'dokonano wymiany filtru kabinowego oraz oleju, wymieniono uszczelkę pod głowicą'),
-(2, 2, 3, 'filtr oleju, filtr powietrza, filtr paliwa', 'dokonano wymiany filtrów'),
-(3, 2, 2, 'Przednia szyba, lewe lustro', 'dokonano wymiany przedniej szyby oraz lewego lusterka.'),
-(8, 3, 4, 'asd', 'asd'),
-(10, 3, 3, 'naprawiony ', 'bardzo dobrze');
+(14, 2, 18, 'Olej, opony, filtry', 'Dokonano wymiany opon, wymiany oleju oraz filtrów'),
+(15, 2, 23, 'Fotel pasażera, poduszka powietrzna', 'Dokonano wymiany fotelu pasażera oraz poduszki powietrznej pasażera.'),
+(16, 2, 27, 'Skrzynia biegów', 'Dokonano wymiany skrzyni biegów'),
+(17, 2, 15, 'Żarówki', 'Wymiana żarówek'),
+(18, 2, 18, 'szyba przednia', 'wymianiłem szybę :)');
 
 --
 -- Wyzwalacze `vdb_repairs`
@@ -121,9 +121,11 @@ CREATE TABLE `vdb_users` (
 --
 
 INSERT INTO `vdb_users` (`Id`, `Name`, `Surname`, `Login`, `Password`, `Type`) VALUES
-(1, 'Admin', 'Admin', 'Admin', 'zaq1@WSX', 'administrator'),
-(2, 'Serwisant', 'Serwisant', 'Serwisant', 'Serwisantzaq1', 'serwisant'),
-(3, 'asd', 'asd', 'asd', 'asd', 'serwisant');
+(2, 'Serwisant', 'Serwisant', 'Serwisant', 'zaq1@WSX', 'serwisant'),
+(3, 'Pracownik', 'Pracownik', 'Pracownik', 'zaq1@WSX', 'pracownik'),
+(29, 'c', 'c', 'c', 'c', 'serwisant'),
+(30, 'b', 'b', 'b', 'b', 'pracownik'),
+(31, 'a', 'a', 'a', 'a', 'administrator');
 
 -- --------------------------------------------------------
 
@@ -137,22 +139,23 @@ CREATE TABLE `vdb_vehicles` (
   `Model` varchar(50) COLLATE utf8mb4_polish_ci DEFAULT NULL,
   `Type` enum('Sedan','SUV','Hatchback','VAN','Coupe','Camper','Cabriolet') COLLATE utf8mb4_polish_ci DEFAULT NULL,
   `Engine_capacity` float DEFAULT NULL,
-  `State` enum('dostępny','w naprawie','oczekujący','wypożyczony') COLLATE utf8mb4_polish_ci DEFAULT NULL
+  `State` enum('dostępny','w naprawie','oczekujący','wypożyczony') COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `Img` text COLLATE utf8mb4_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Zrzut danych tabeli `vdb_vehicles`
 --
 
-INSERT INTO `vdb_vehicles` (`Id`, `Name`, `Model`, `Type`, `Engine_capacity`, `State`) VALUES
-(1, 'VW', 'Transporter', 'VAN', 1.8, 'wypożyczony'),
-(2, 'Scania', 'camper', 'Camper', 2, 'w naprawie'),
-(3, 'VW', 'Transporter', 'VAN', 1.8, 'dostępny'),
-(4, 'MAN', 'camper', 'Camper', 2, 'w naprawie'),
-(5, 'MAN', 'xyz', 'Sedan', 2.2, 'w naprawie'),
-(6, 'Volvo', 'vfr', 'Sedan', 1.6, 'wypożyczony'),
-(7, 'MAN', 'xyz', 'Sedan', 2.2, 'dostępny'),
-(8, 'Volvo', 'vfr', 'Sedan', 1.6, 'oczekujący');
+INSERT INTO `vdb_vehicles` (`Id`, `Name`, `Model`, `Type`, `Engine_capacity`, `State`, `Img`) VALUES
+(15, 'Audi', 'Audi', 'Cabriolet', 2.2, 'dostępny', 'https://res.cloudinary.com/dvz618eta/image/upload/v1621949053/pz_img_2021/taopvyrooxfu00pezoax.jpg'),
+(16, 'Fiat', 'Ducato', 'Camper', 2.5, 'dostępny', 'https://res.cloudinary.com/dvz618eta/image/upload/v1621949126/pz_img_2021/hlzvsqgddoavw7pwldvf.jpg'),
+(18, 'Fiat', 'Fiat', 'Camper', 2.8, 'dostępny', 'https://res.cloudinary.com/dvz618eta/image/upload/v1621949187/pz_img_2021/cuawfqbgxnrdvzjptadg.jpg'),
+(20, 'Toyota', 'Corolla', 'Hatchback', 1.8, 'wypożyczony', 'https://res.cloudinary.com/dvz618eta/image/upload/v1621949281/pz_img_2021/ovdkxx14ljvjxzg2zfi8.jpg'),
+(23, 'Jeep', 'Jeep', 'SUV', 2, 'dostępny', 'https://res.cloudinary.com/dvz618eta/image/upload/v1621949362/pz_img_2021/l7lyxx1oi3mdyea0tdeq.jpg'),
+(24, 'Mercedes', 'Mercedes', 'SUV', 2.1, 'oczekujący', 'https://res.cloudinary.com/dvz618eta/image/upload/v1621949394/pz_img_2021/qewbwsh6qdf4zplynsbd.jpg'),
+(26, 'Toyota', 'Corolla', 'Hatchback', 1.5, 'w naprawie', 'https://res.cloudinary.com/dvz618eta/image/upload/v1621949310/pz_img_2021/rodnm7yzdng8v1lyudib.jpg'),
+(27, 'VW', 'T3', 'VAN', 1.3, 'dostępny', 'https://res.cloudinary.com/dvz618eta/image/upload/v1621949430/pz_img_2021/uktwdlcejufooazq1ixu.jpg');
 
 -- --------------------------------------------------------
 
@@ -174,10 +177,13 @@ CREATE TABLE `vdb_vehicle_rentals` (
 --
 
 INSERT INTO `vdb_vehicle_rentals` (`Id`, `Customer_id`, `Vehicle_id`, `Rent_data`, `Return_data`, `State`) VALUES
-(1, 1, 1, '2021-04-25', '2021-05-30', 'aktywne'),
-(2, 5, 6, '2021-04-23', '2021-06-16', 'zamknięte'),
-(4, 2, 5, '2021-04-18', '2021-06-15', 'zamknięte'),
-(5, 2, 5, '2021-04-18', '2021-06-15', 'aktywne');
+(20, 5, 15, '2021-05-26', '2021-06-06', 'zamknięte'),
+(21, 1, 15, '2021-05-28', '2021-06-02', 'zamknięte'),
+(22, 2, 15, '2021-07-12', '2021-07-31', 'zamknięte'),
+(23, 2, 15, '2021-07-12', '2021-07-31', 'aktywne'),
+(24, 5, 20, '2021-06-10', '2021-06-26', 'aktywne'),
+(25, 5, 20, '2021-06-10', '2021-06-26', 'aktywne'),
+(26, 1, 18, '2021-06-11', '2021-06-19', 'zamknięte');
 
 --
 -- Wyzwalacze `vdb_vehicle_rentals`
@@ -247,31 +253,31 @@ ALTER TABLE `testTable`
 -- AUTO_INCREMENT dla tabeli `vdb_customer`
 --
 ALTER TABLE `vdb_customer`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT dla tabeli `vdb_repairs`
 --
 ALTER TABLE `vdb_repairs`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT dla tabeli `vdb_users`
 --
 ALTER TABLE `vdb_users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT dla tabeli `vdb_vehicles`
 --
 ALTER TABLE `vdb_vehicles`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT dla tabeli `vdb_vehicle_rentals`
 --
 ALTER TABLE `vdb_vehicle_rentals`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Ograniczenia dla zrzutów tabel
