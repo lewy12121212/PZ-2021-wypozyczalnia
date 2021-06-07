@@ -50,3 +50,11 @@
 .form-select{
     font-size: 20px;
 }
+
+.info_div{
+    margin-top: 10px;
+    border: 2px solid black;
+    margin: 10px;
+    padding: 10px;
+}
+

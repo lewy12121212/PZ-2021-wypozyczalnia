@@ -17,15 +17,7 @@ const AddUser = (props) => {
 
     const submitAddUser = () => { // to instert data
 
-        if(password === repassword){
-            Axios.post('http://localhost:3001/insertUser', {
-                name: name,
-                surname: surname,
-                login: login,
-                password: password,
-                type: type
-            });
-        
+        if(password === repassword){ 
             if(name !== "" && surname !== "" && password !== ""){
                 setUserData([
                     ...userData, 
@@ -37,6 +29,15 @@ const AddUser = (props) => {
                         Type: type
                     }
                 ]);
+
+                Axios.post('http://localhost:3001/insertUser', {
+                    name: name,
+                    surname: surname,
+                    login: login,
+                    password: password,
+                    type: type
+                });
+
                 alert("Poprawnie dodano użytkownika :)")
                 props.refresh()
             } else {

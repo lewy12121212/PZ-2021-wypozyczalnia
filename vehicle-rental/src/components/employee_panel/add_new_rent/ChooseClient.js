@@ -44,6 +44,11 @@ class ChooseClient extends React.Component {
     }
 
     triggerShowMainPanel = () => {
+        this.setState({
+            ...this.state,
+            clientsList: []
+        })
+
         Axios.get('http://localhost:3001/getAllClientInfo').then((response) => {
             this.setState({
                 ...this.state,
@@ -104,11 +109,12 @@ class ChooseClient extends React.Component {
                         })}
                     </select>
                     <hr className="col-10"></hr>
+                    <h5>Wybierz datę</h5>
                     <div className="date-box">
-                        <input type="date" min={this.state.todayDate} onChange={(e) => {
+                        Data rozpoczęcia: <input type="date" min={this.state.todayDate} onChange={(e) => {
                             this.setStartDate(e.target.value)
                         }}></input>
-                        <input type="date" min={this.state.startDate} onChange={(e) => {
+                        Data zakończenia: <input type="date" min={this.state.startDate} onChange={(e) => {
                             this.setEndDate(e.target.value)
                         }}></input>
                     </div>

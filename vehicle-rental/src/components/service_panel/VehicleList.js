@@ -8,12 +8,26 @@ import VehicleItem from './VehicleItem';
 const VehicleList = (props) => {
 
     const [vehicleList, setVehiceList] = useState([])
+    //const [forRefresh, setForRefresh] = useState(false)
 
     useEffect(()=> {
         Axios.get('http://localhost:3001/getVehicleList').then((response) => {
             setVehiceList(response.data)
         })
     },[]);
+
+    function triggerRefreshPanel(){
+        Axios.get('http://localhost:3001/getVehicleList').then((response) => {
+            setVehiceList(response.data)
+        })
+
+        //if(this.for_refresh === false){
+        //    setForRefresh(true)
+        //} else {
+        //    setForRefresh(false)
+        //}
+        props.triggerRefreshPanel()
+    }
 
     return (
         <div>
@@ -25,6 +39,7 @@ const VehicleList = (props) => {
                             triggerShowVehiceInfo={props.triggerShowVehiceInfo} 
                             triggerShowRepairForm={props.triggerShowRepairForm} 
                             setActiveVehicle={props.handleVehicle}
+                            triggerRefreshPanel={triggerRefreshPanel}
                         />  
                     ); // przekazanie parametrów do komponentu pojedynczego "itemu"
                 } else {

@@ -28,6 +28,7 @@ class EmployeePanel extends React.Component {
       visable_info: false,
       visable_booklet: false
     })
+    //window.location.reload();
   }
 
   triggerShowAddNewRent = () => {

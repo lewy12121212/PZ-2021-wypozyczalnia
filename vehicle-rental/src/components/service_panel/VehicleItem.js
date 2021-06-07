@@ -1,10 +1,12 @@
 import React from 'react'
+import Axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../components_style/style.css'
 import './style.css'
 
 const VehicleItem = (props) => {
 
+    //const [rerender, setRerender] = useState("")
     //setVehicle = () => {
     //    var lang = this.dropdown.value;
     //    this.props.onSelectLanguage(lang);            
@@ -15,6 +17,23 @@ const VehicleItem = (props) => {
 
     const handleRepairInfoClick = () => {
         props.triggerShowRepairForm(props.vehicle);
+    }
+
+    const handleChangeStateClick = () => {
+        //alert("change state")
+        //axios change state
+        if(props.vehicle['State'] === "oczekujący"){
+            Axios.post('http://localhost:3001/setVehicleRepair', {
+                fixVehicle: props.vehicle['Id']
+            });
+        } else if(props.vehicle['State'] === "w naprawie") {
+            Axios.post('http://localhost:3001/setVehicleWaiting', {
+                fixVehicle: props.vehicle['Id']
+            });
+        }
+
+        props.triggerRefreshPanel()
+
     }
 
     return (
@@ -28,6 +47,7 @@ const VehicleItem = (props) => {
             <div className="input-group mb-3 singleCard">
                 <button className="btn btn-warning" onClick={handleInfoClick}>Informacje</button>
                 <button className="btn btn-success" onClick={handleRepairInfoClick}>Zakończ serwisowanie</button>
+                <button className="btn btn-primary" onClick={handleChangeStateClick}>Zmień status</button>
             </div>
         </div>
     );

@@ -17,15 +17,6 @@ const AddVehicle = (props) => {
 
     const submitAddVehicle = () => { // to instert data
 
-        Axios.post('http://localhost:3001/insertVehicle', {
-            name: name,
-            model: model,
-            type: type,
-            engine: engine,
-            state: state,
-            img: img
-        });
-    
         if(name !== "" && model !== "" && type !== "" && engine !== "" && state !== "" && img !== ""){
             setVehicleData([
                 ...vehicleData, 
@@ -38,6 +29,16 @@ const AddVehicle = (props) => {
                     Img: img
                 }
             ]);
+
+            Axios.post('http://localhost:3001/insertVehicle', {
+                name: name,
+                model: model,
+                type: type,
+                engine: engine,
+                state: state,
+                img: img
+            });
+
             alert("Poprawnie dodano pojazd :)")
             props.refresh()
         } else {
