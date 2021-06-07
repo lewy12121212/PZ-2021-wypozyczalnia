@@ -30,28 +30,31 @@ const AddRepairPanel = (props) => {
 
 
   const submitAddRepair = () => { // to instert data
-    Axios.post('http://localhost:3001/insertRepair', {
+
+
+    if(reparerId !== "" && vehicleId !== "" && replacedParts !== ""  && activitiesPerformed !== ""){ //typeof ? 
+      setRepairData([
+          ...repairData, 
+          {
+            Reparer_id: reparerId,
+            Vehicle_id: vehicleId,
+            Replaced_parts: replacedParts,
+            Activities_performed: activitiesPerformed
+          }
+      ]);
+      Axios.post('http://localhost:3001/insertRepair', {
         reparerId: reparerId, 
         vehicleId: vehicleId,
         replacedParts: replacedParts,
         activitiesPerformed: activitiesPerformed
-    });
+      });
 
-    if(reparerId !== "" && vehicleId !== "" && replacedParts !== ""  && activitiesPerformed !== ""){ //typeof ? 
-        setRepairData([
-            ...repairData, 
-            {
-              Reparer_id: reparerId,
-              Vehicle_id: vehicleId,
-              Replaced_parts: replacedParts,
-              Activities_performed: activitiesPerformed
-            }
-        ]);
     } else {
-        console.log("undefined data of repair :(")
+      console.log("undefined data of repair :(")
+      alert("Nie wypełniono potrzebnych danych!")
     }
 
-};
+  };
 
 
   return (
@@ -65,7 +68,6 @@ const AddRepairPanel = (props) => {
             <td>
               <select onChange={(e) => {
                 setReparerId(e.target.value)
-                alert(reparerId)
               }}>
                 <option value="">...Wybierz serwisanta</option>
                 {usersList.map((val) => {
@@ -99,9 +101,7 @@ const AddRepairPanel = (props) => {
               <button className="btn btn-primary" onClick={submitAddRepair}>Zakończ serwisowanie</button>
             </td>
           </tr>
-          
         </table>
-
       </form>
     </div>
   )

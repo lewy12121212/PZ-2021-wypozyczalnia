@@ -1,11 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../components_style/style.css'
 import '../style.css'
+import VehicleInfoPanel from '../../vehicle_info_component/VehicleInfoPanel'
 
 const VehicleItem = (props) => {
 
     var chooseState = false
+    const [vehicleInfo, setVehicleInfo] = useState(false)
 
     const handleChooseVehicleClick = () => {
         if(chooseState === false){
@@ -19,9 +21,18 @@ const VehicleItem = (props) => {
         }
     }
 
+    const handleInfoOver = () => {
+        setVehicleInfo(true)
+    }
+
+    const handleInfoOut = () => {
+        setVehicleInfo(false)
+    }
+
+
     return (
         
-        <div className="SingleVehicleItem VehicleItemHover" id={props.vehicle['Id']} onClick={handleChooseVehicleClick}>
+        <div className="SingleVehicleItem VehicleItemHover" id={props.vehicle['Id']} onClick={handleChooseVehicleClick} onMouseEnter={handleInfoOver} onMouseLeave={handleInfoOut}>
             <div className="container row">
                 <div className="col-2 box">
                     <img src={props.vehicle['Img']} style={{height: '100px'}} alt="Zdjęcie pojazdu"/>
@@ -35,10 +46,14 @@ const VehicleItem = (props) => {
                     <h5>Pojemość silnika: {props.vehicle['Engine_capacity']}</h5>
                 </div>
                 <div className="col-2 align-self-center box">
-                    <button className="btn btn-warning">Informacje</button>
                 </div>
 
             </div>
+            { (vehicleInfo === true) && 
+                <div className="info_div col-12" id="vehicle_info_div">
+                    <VehicleInfoPanel vehicle={props.vehicle} />
+                </div>
+            }
 
         </div>
     );

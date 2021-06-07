@@ -347,11 +347,28 @@ app.post('/endRental', (req, res) => { //req -> do pobrania danych z frontend / 
 app.post('/setVehicleRepair', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
     
     const vehicleId = req.body.fixVehicle
-    console.log(vehicleId)
+    console.log("repair: " + vehicleId)
 
     if(vehicleId != ""){
         //console.log("ojć" + vehicleName +", "+ vehicleModel)
         const sqlInsert = "UPDATE vdb_vehicles SET State = 'w naprawie' WHERE Id LIKE (?)"
+        db.query(sqlInsert, [vehicleId], (err, result) => {
+            console.log(result)
+        })
+    } else {
+        console.log("empty data to database :(")
+    }
+});
+
+//zmiana statusu pojazdu ,na oczekujący
+app.post('/setVehicleWaiting', (req, res) => { //req -> do pobrania danych z frontend / res -> do wysłania danych na frontend
+    
+    const vehicleId = req.body.fixVehicle
+    console.log("waiting: " + vehicleId)
+
+    if(vehicleId != ""){
+        //console.log("ojć" + vehicleName +", "+ vehicleModel)
+        const sqlInsert = "UPDATE vdb_vehicles SET State = 'oczekujący' WHERE Id LIKE (?)"
         db.query(sqlInsert, [vehicleId], (err, result) => {
             console.log(result)
         })

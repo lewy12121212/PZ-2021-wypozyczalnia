@@ -15,7 +15,8 @@ class ServicePanel extends React.Component {
       visable_serivce_panel: true,
       visable_vehice_info: false,
       visable_vehicle_form: false,
-      active_vehicle: null
+      active_vehicle: null,
+      for_refresh: false
     };
   }
 
@@ -49,6 +50,20 @@ class ServicePanel extends React.Component {
     })
   }
 
+  triggerRefreshPanel = () => {
+    //alert("jesteś tutaj")
+    if(this.for_refresh === false){
+      this.setState({
+        for_refresh: true
+      })
+    } else {
+      this.setState({
+        for_refresh: false
+      })
+    }
+    this.setState({});
+  }
+
   handleVehicle = (active_vehicle) => {
     this.setState({active_vehicle: active_vehicle});
   }
@@ -68,6 +83,7 @@ class ServicePanel extends React.Component {
                   triggerShowVehiceInfo={this.triggerShowVehiceInfo} 
                   triggerShowRepairForm={this.triggerShowRepairForm} 
                   setActiveVehicle={this.handleVehicle}
+                  triggerRefreshPanel={this.triggerRefreshPanel}
                 />
               </div>
               <div className="SingleComponentBox col-md">
@@ -77,6 +93,7 @@ class ServicePanel extends React.Component {
                   triggerShowVehiceInfo={this.triggerShowVehiceInfo} 
                   triggerShowRepairForm={this.triggerShowRepairForm} 
                   setActiveVehicle={this.handleVehicle}
+                  triggerRefreshPanel={this.triggerRefreshPanel}
                 />
               </div>
               <div className="SingleComponentBox col-md">

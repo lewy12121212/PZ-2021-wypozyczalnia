@@ -7,7 +7,7 @@ import RepairsInfo from '../../vehicle_info_component/RepairsInfo'
 
 const HistoryPanel = (props) => {
 
-    const [tableName, setTableName] = useState('')
+    var tableName = ""
     const [repairDataTable, setRepairDataTable] = useState(false)
     const [rentalsDataTable, setRentalsDataTable] = useState(false)
 
@@ -15,14 +15,19 @@ const HistoryPanel = (props) => {
     const [RepairData, setRepairData] = useState([])
     const [RentalsData, setRentalsData] = useState([])
 
+
+    function setTableName(name){
+        tableName = name
+    }
+
     function setTableVisable(){
 
         if(tableName === "vdb_repairs"){
-            setRepairDataTable(false)
-            setRentalsDataTable(true)
-        } else if(tableName === "vdb_vehicle_rentals"){
             setRepairDataTable(true)
-            setRentalsDataTable(false)  
+            setRentalsDataTable(false)
+        } else if(tableName === "vdb_vehicle_rentals"){
+            setRepairDataTable(false)
+            setRentalsDataTable(true)  
         }
     }
     
