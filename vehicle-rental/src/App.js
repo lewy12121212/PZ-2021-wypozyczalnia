@@ -8,7 +8,10 @@ import React from 'react';
 import AdminPanel from './components/admin_panel/AdminPanel'
 import ServicePanel from './components/service_panel/ServicePanel'
 import EmployeePanel from './components/employee_panel/EmployeePanel'
-
+//import { useCookies } from "react-cookie";
+//import cookie from "react-cookie";
+//import Cookies from 'universal-cookie';
+//import cookie from "react-cookie";
 //import AddDataFrom from './components/AddDataTests/AddDataForm'
 import Login from './components/login/Login'
 //import LoginComponent from './components/LoginComponent'
@@ -19,12 +22,46 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      token: false,
-      login: '',
-      type: '',  
-      loginData: []
-    };
+    var login = this.getCookie("login")
+    var type = this.getCookie("type")
+
+    if(login != null && type != null){
+      this.state = {
+        token: true,
+        login: login,
+        type: type,  
+        loginData: []
+      }; 
+    } else {
+      this.state = {
+        token: false,
+        login: login,
+        type: type,  
+        loginData: []
+      }; 
+    }
+
+    //alert("wszystko oki" + this.state.type + ": " + this.state.login + " " + this.state.token)
+    //this.setToken()
+    //var [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  }
+
+  setToken = () => {
+    var login = this.getCookie("login")
+    var type = this.getCookie("type")
+    console.log("setToken" + this.getCookie("login") + ":" + this.getCookie("type"))
+    if(login != null && type != null) {
+      this.setState({
+        ...this.state,
+        login: login,
+        type: type,
+        token: true
+      })
+      alert("wszystko oki" + this.state.type + ": " + this.state.login + " " + this.state.token)
+      console.log("wszystko oki: " + typeof type + ": " + type)
+    } else {
+      alert("coś poszło nie tak :/")
+    }
   }
 
   SendLoginData = (Login, Password) => {
@@ -34,13 +71,26 @@ class App extends React.Component {
         password: Password
       }).then((response) => {
         //alert(Object.values(response.data[0].Login))
-        this.setState({
-          ...this.state,
-          loginData: response.data,
-          login: Object.values(response.data[0].Login),
-          type: Object.values(response.data[0].Type),
-          token: true
-        })
+        if(response.data.length > 0){
+          this.setState({
+            ...this.state,
+            loginData: response.data,
+            login: Object.values(response.data[0].Login),
+            type: Object.values(response.data[0].Type),
+            token: true
+          })
+
+          document.cookie = "login=" + this.state.login + "; path=/;"
+          document.cookie = "type=" + this.state.type + "; path=/;"
+
+        } else {
+
+          alert("Nie ma takiego użytkownika! :/")
+          document.cookie = "login=; path=/;"
+          document.cookie = "type=; path=/;"
+          
+        }
+        
       });
     } else {
       alert('Nie uzupełniono wszystkich danych!')
@@ -55,6 +105,20 @@ class App extends React.Component {
       type: '',  
       loginData: []
     })
+    document.cookie = "login=; path=/;"
+    document.cookie = "type=; path=/;"
+    this.getCookie("login")
+    console.log("wylogowano!")
+  }
+
+  getCookie = (cookieName) => {
+    let cookie = {};
+    document.cookie.split(';').forEach(function(el) {
+      let [key,value] = el.split('=');
+      cookie[key.trim()] = value;
+    })
+    console.log(cookie[cookieName]);
+    return cookie[cookieName];
   }
 
   render() {
@@ -66,7 +130,7 @@ class App extends React.Component {
           <Login SendLoginData={this.SendLoginData}/>
         </div>
       )
-    } else if(this.state.token === true) {
+    } else if(this.state.token === true)  {
 
       if(this.state.type.toString() === 'a,d,m,i,n,i,s,t,r,a,t,o,r'){
         return(

@@ -61,7 +61,8 @@ class ServicePanel extends React.Component {
         for_refresh: false
       })
     }
-    this.setState({});
+
+    window.location.reload();
   }
 
   handleVehicle = (active_vehicle) => {
