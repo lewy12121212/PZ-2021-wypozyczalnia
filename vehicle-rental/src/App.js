@@ -24,6 +24,15 @@ class App extends React.Component {
     super(props);
     var login = this.getCookie("login")
     var type = this.getCookie("type")
+
+    if(typeof login == 'undefined'){
+      document.cookie = "login=; path=/;"
+      document.cookie = "type=; path=/;"
+      login = this.getCookie("login")
+      type = this.getCookie("type")
+    }
+
+
     console.log(typeof login + " : " + typeof type)
     if(login !== '' && type !== ''){
       console.log("null")
@@ -42,6 +51,7 @@ class App extends React.Component {
         loginData: []
       }; 
     }
+    console.log("typ:", typeof this.state.type)
 
   }
 
