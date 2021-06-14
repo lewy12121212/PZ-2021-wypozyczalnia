@@ -103,6 +103,7 @@ class EmployeePanel extends React.Component {
         {this.state.visable_add_new_rent && <AddNewRent ShowEmployeePanel={this.triggerShowEmployeePanel}/>}
         {this.state.visable_end_rent && <EndRent ShowEmployeePanel={this.triggerShowEmployeePanel}/>}
         {this.state.visable_booklet && <AddBooklet ShowEmployeePanel={this.triggerShowEmployeePanel}/>}
+        {this.state.visable_info && <div> <h1>Strona w budowie</h1><button className="btn btn-warning btn-back" onClick={this.triggerShowEmployeePanel}>Powrót</button> </div>}
 
 
       </div>      

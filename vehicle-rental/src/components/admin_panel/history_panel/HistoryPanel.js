@@ -51,7 +51,7 @@ const HistoryPanel = (props) => {
                 setTableVisable()
                 console.log("ustawiono:"+ tableName)
             }}>
-                <option value="none" selected hidden>...Wtbierz historię do wyświetlenia</option>
+                <option value="none" selected hidden>...Wybierz historię do wyświetlenia</option>
                 <option value="vdb_repairs">Historia napraw</option>
                 <option value="vdb_vehicle_rentals">Historia wypożyczeń</option>
             </select><br></br>
