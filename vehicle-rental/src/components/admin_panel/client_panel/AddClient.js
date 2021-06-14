@@ -11,20 +11,11 @@ const AddClient = (props) => {
     const [phoneNumber, setPhoneNumber] = useState('')
     const [mail, setMail] = useState('')
 
-    const [clientData, setClientData] = useState([])
+    //const [clientData, setClientData] = useState([])
 
     const submitAddClient = () => { // to instert data
 
         if(name !== "" && surname !== "" && phoneNumber !== "" && mail !== "" && phoneNumber.length <= 9){
-            setClientData([
-                ...clientData, 
-                {   
-                    Name: name,
-                    Surname: surname,
-                    Phone_number: phoneNumber,
-                    Mail: mail,
-                }
-            ]);
 
             Axios.post('http://localhost:3001/insertClient', {
                 name: name,
@@ -32,8 +23,14 @@ const AddClient = (props) => {
                 phoneNumber: phoneNumber,
                 mail: mail
             });
+        
+            setName('')
+            setSurname('')
+            setPhoneNumber('')
+            setMail('')
 
             alert("Poprawnie dodano klienta :)")
+            document.getElementById("addClientForm").reset();
             props.refresh()
         } else {
             alert("Niektóre dane nie są poprawne :/")
@@ -44,6 +41,7 @@ const AddClient = (props) => {
 
     return (
         <div className="container option_panel_box d-flex justify-content-center">
+            <form id="addClientForm" className="container option_panel_box d-flex justify-content-center">
             <table className="col-8 center-block text-center">
                 <tr>
                     <th colspan="2"><h5>Dodaj klientów</h5></th>
@@ -67,7 +65,7 @@ const AddClient = (props) => {
                 <tr>
                     <td>Telefon:</td>
                     <td>
-                        <input type="text" onChange={(e) => {
+                        <input type="text" maxlength="9" onChange={(e) => {
                             setPhoneNumber(e.target.value)
                         }}></input>
                     </td>
@@ -85,6 +83,7 @@ const AddClient = (props) => {
                     <td colspan="2"><input type="button" className="btn btn-success" value="dodaj klienta" onClick={submitAddClient}></input></td>
                 </tr>
             </table>
+            </form>
         </div>
     )
 }

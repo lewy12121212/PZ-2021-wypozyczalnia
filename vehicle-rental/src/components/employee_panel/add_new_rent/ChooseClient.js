@@ -44,6 +44,7 @@ class ChooseClient extends React.Component {
     }
 
     triggerShowMainPanel = () => {
+
         this.setState({
             ...this.state,
             clientsList: []
@@ -51,7 +52,34 @@ class ChooseClient extends React.Component {
 
         Axios.get('http://localhost:3001/getAllClientInfo').then((response) => {
             this.setState({
-                ...this.state,
+                clientsList: response.data
+            })
+        })
+
+        //alert("DODANO!")
+        //Axios.get('http://localhost:3001/getAllClientInfo').then((response) => {
+//
+        //    console.log("res" + response.data)
+        //    console.log("res" + this.state.clientsList)
+//
+        //    if(this.state.clientsList === response.data){
+        //        alert("oh no ! :/")
+        //        console.log("STATE THE SAME ")
+        //        this.triggerShowMainPanel()
+        //    } else {
+        //        alert("thats good :)")
+        //        this.setState({
+        //            ...this.state,
+        //            clientsList: response.data
+        //        })
+        //    }
+        //})
+
+    }
+
+    refreshList = () => {
+        Axios.get('http://localhost:3001/getAllClientInfo').then((response) => {
+            this.setState({
                 clientsList: response.data
             })
         })
@@ -81,7 +109,8 @@ class ChooseClient extends React.Component {
         if(this.state.client === ""){
             return (
                 <div>
-                    <select class="form-select form-select-lg mb-3 col-6" onChange={(e) => {
+                    <select class="form-select form-select-lg mb-3 col-6" onClick={this.refreshList} onChange={(e) => {
+                        //this.refreshList()
                         this.handleChooseClient(e.target.value)
                     }}>
                         <option selected value={null}>Dodaj nowego klienta lub wybierz z listy:</option>

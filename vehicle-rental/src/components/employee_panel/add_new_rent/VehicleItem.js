@@ -26,7 +26,7 @@ const VehicleItem = (props) => {
 
     return (
         <div className="SingleVehicleItem VehicleItemHover">
-            <div className="container row" onClick={handleChooseVehicleClick} onMouseEnter={handleInfoOver} onMouseLeave={handleInfoOut}>
+            <div className="container row" onDoubleClick={handleChooseVehicleClick} onClick={handleInfoOver} onMouseLeave={handleInfoOut}>
                 <div className="col-2 box">
                     <img src={props.vehicle['Img']} style={{height: '100px'}} alt="Zdjęcie pojazdu"/>
                 </div>
