@@ -17,9 +17,9 @@ const RentalsInfo = (props) => {
                 <h2>{val.Name}</h2>
                 <h5>Id: {val.Id}</h5>
                 <h5>Model: {val.Model}</h5>
-                <h5>Type: {val.Type}</h5>
-                <h5>Engine capacity: {val.Engine_capacity}</h5>
-                <h5>State: {val.State}</h5>
+                <h5>Typ: {val.Type}</h5>
+                <h5>Pojemność silnika: {val.Engine_capacity}</h5>
+                <h5>Status: {val.State}</h5>
                 <img src={val.Img} style={{height: '200px'}} alt="Zdjęcie pojazdu"/>
                 </div>
             )
